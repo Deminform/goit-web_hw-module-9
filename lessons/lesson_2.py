@@ -26,5 +26,12 @@ soup = BeautifulSoup(page.text, 'html.parser')
 # first_paragraph_parent = first_paragraph.parent
 # print(first_paragraph_parent)
 
-container = soup.find("div", attrs={"class": "quote"}).find_parent("div", class_="col-md-8")
-print(container)
+# container = soup.find("div", attrs={"class": "quote"}).find_parent("div", class_="col-md-8")
+# print(container)
+
+next_sibling = soup.find("span", attrs={"class": "tag-item"}).find_next_sibling("span")
+# print(next_sibling)
+
+previous_sibling = next_sibling.find_previous_sibling("span")
+print(previous_sibling)
+
