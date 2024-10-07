@@ -20,12 +20,12 @@ def parse_data():
 
     if html_doc.status_code == 200:
         soup = BeautifulSoup(html_doc.content, 'html.parser')
-        books = soup.select('section')[0].find_all('article', attrs={'class': 'product_pod'})
-        for book in books:
-            img_url = f"{url}{book.find('img')['src']}"
-            rating = rate_to_number.get(book.find('p', attrs={'class': 'star-rating'})['class'][1])
-            title = book.find('h3').find('a')['title']
-            price = float(book.find('p', attrs={'class': 'price_color'}).text[1:])
+        all_books = soup.select('section')[0].find_all('article', attrs={'class': 'product_pod'})
+        for book_el in all_books:
+            img_url = f"{url}{book_el.find('img')['src']}"
+            rating = rate_to_number.get(book_el.find('p', attrs={'class': 'star-rating'})['class'][1])
+            title = book_el.find('h3').find('a')['title']
+            price = float(book_el.find('p', attrs={'class': 'price_color'}).text[1:])
             store_.append({
                 'img_url': img_url,
                 'rating': rating,
